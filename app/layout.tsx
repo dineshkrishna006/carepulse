@@ -29,9 +29,6 @@ export default function RootLayout({
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="dark">
-          <div className="w-full bg-white h-[100px]">
-
-          </div>
           {children}
         </ThemeProvider>
       </body>
