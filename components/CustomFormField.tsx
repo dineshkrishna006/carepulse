@@ -20,6 +20,7 @@ import { FormFieldType } from "./forms/PatientForm";
 import Image from "next/image";
 import { E164Number } from "libphonenumber-js/core";
 import { date } from "zod";
+import { Select } from "./ui/select";
 interface CustomProps {
   control: Control<any>;
   fieldType: FormFieldType;
@@ -87,9 +88,9 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
           <FormControl>
             <DatePicker
               selected={field.value}
-              onChange={(date) => field.onChange}
+              onChange={(date) => field.onChange(date)}
               dateFormat={dateFormat??
-                'MM/DD/YYYY'
+                'MM/dd/YYYY'
               }
               showTimeSelect={showTimeSelect??false}
               timeInputLabel="Time:"
@@ -98,6 +99,14 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
           </FormControl>
         </div>
       );
+    case FormFieldType.SELECT:
+      return(
+        <FormControl>
+          <Select onValueChange={field.change} defaultValue={field.value}>
+            
+          </Select>
+        </FormControl>
+      )
     case FormFieldType.SKELETON:
       return(
         renderSkeleton ? renderSkeleton(field):null
